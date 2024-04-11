@@ -1,0 +1,182 @@
+ul {
+    list-style: none;
+}
+
+.navi {
+    display: flex;
+    justify-content: end;
+}
+
+#backroundHomepage {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(60%);
+    padding-bottom: 3%;
+}
+
+.homepageText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px #000000;
+    font-family: Gabriola;
+}
+
+#homeNavi, #InfoNavi, #ContactNavi {
+    padding-top: 15px;
+}
+
+.navi li a {
+    text-decoration: none;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.navi li a:hover {
+    background-color: gray;
+    color: white;
+    border-color: white;
+}
+
+.navi li a {
+    border-color: white;
+}
+
+.whiteBox {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    max-width: 1100px;
+    text-align: center;
+    margin-top: calc(100vh - 15%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 100px;
+
+}
+
+.whiteBox h3 {
+    font-size: 3.5vw;
+    font-weight: bold;
+    font-family: Gabriola;
+}
+
+.whiteBox h4 {
+    font-size: 1.7vw;
+    font-weight: bold;
+    font-family: Gabriola;
+}
+
+.whiteBox p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: rgb(119, 118, 118);
+}
+
+form {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    padding-right: 100px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="datetime-local"],
+input[type="company"],
+textarea {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #f2f2f2;
+    transition: box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="datetime-local"]:focus,
+input[type="company"]:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px 3px rgba(118, 29, 29, 0.768);
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="tel"]:hover,
+input[type="password"]:hover,
+input[type="datetime-local"]:hover,
+input[type="company"]:hover,
+textarea:hover {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+input[type="text"]:focus:hover,
+input[type="email"]:focus:hover,
+input[type="tel"]:focus:hover,
+input[type="password"]:focus:hover,
+input[type="datetime-local"]:focus:hover,
+input[type="company"]:focus:hover,
+textarea:focus:hover {
+    box-shadow: 0 0 10px 3px rgba(118, 29, 29, 0.768);
+}
+
+
+/* Entferne die .button-Klasse, wenn du den Button direkt ansprechen möchtest */
+#submitButton {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 50px;
+    border: none;
+    background-color: rgba(118, 29, 29, 0.768);
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#submitButton:hover {
+    background-color: rgba(67, 17, 17, 0.768);
+}
+
+
+.impressum{
+    padding-top:10px;
+    background-color: rgb(227, 227, 227);
+    text-align: center;
+    padding: 0.1px;
+    font-size: 12px;
+}
+
+
+        

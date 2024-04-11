@@ -19,6 +19,20 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Identity\Pages\Account\Manage\RegisterModel.cs" />
+    <Compile Remove="css\**" />
+    <Compile Remove="Areas\Identity\Pages\Account\RegisterModel2.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="css\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="css\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="css\**" />
   </ItemGroup>
 
 </Project>
