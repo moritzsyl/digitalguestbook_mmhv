@@ -16,22 +16,29 @@
                     <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="mb-3">
-                        <label for="firstName" class="form-label">First Name *</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Max" aria-required="true"/>
+                        <label asp-for="Input.FirstName" class="form-label">Vorname *</label>
+                        <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="Max" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="lastName" class="form-label">Last Name* </label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Mustermann" aria-required="true"/>
+                        <label asp-for="Input.LastName" class="form-label">Nachname *</label>
+                        <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Mustermann" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
                     </div>
-
                     <div class="mb-3">
                         <label asp-for="Input.Email" class="form-label">Email *</label>
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="name@example.com" />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="phoneNumber" class="form-label">Phone Number *</label>
-                        <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="+43 888 05 05" aria-required="true"/>
+                        <label asp-for="Input.PhoneNumber" class="form-label">Telefonnummer *</label>
+                        <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="tel" aria-required="true" placeholder="+43 123 1234" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Input.CompanyName" class="form-label">Firmenname</label>
+                        <input asp-for="Input.CompanyName" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Example GmbH" />
+                        <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="Input.Password" class="form-label">Password *</label>
@@ -40,13 +47,14 @@
                     </div>
                     <div class="mb-3">
                         <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password *</label>
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="organization" aria-required="true" placeholder="Confirm password" />
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
+
                     <!-- End of existing form fields -->
 
                     <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-                </form>
+                </form> 
             </div>
             
         </div>
