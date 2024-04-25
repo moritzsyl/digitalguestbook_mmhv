@@ -1,18 +1,16 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
-    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+ViewData["Title"] = "Register";
+Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 }
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
-            <!-- Keine Card in dem Fall da das Formular dann auf der Homepage selbst in einer Card angezeigt wird -->
             <div class="card-body">
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    <h2>Create a new account</h2>
+                    <h2 style="color: #002b6c;">Create a new account</h2>
                     <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="mb-3">
@@ -41,22 +39,27 @@
                         <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Input.Password" class="form-label">Password *</label>
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <label asp-for="Input.Password" class="form-label" style="color: #002b6c;">Password *</label>
+                        <input asp-for="Input.Password" id="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" style="color: #002b6c;" />
+                        <span asp-validation-for="Input.Password" class="text-danger" style="color: #002b6c;"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="Input.ConfirmPassword" class="form-label">Confirm Password *</label>
                         <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="organization" aria-required="true" placeholder="Confirm password" />
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        <label asp-for="Input.ConfirmPassword" class="form-label" style="color: #002b6c;">Confirm Password *</label>
+                        <input asp-for="Input.ConfirmPassword" id="confirmpassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm password" style="color: #002b6c;" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger" style="color: #002b6c;"></span>
                     </div>
 
-                    <!-- End of existing form fields -->
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" id="showPasswordCheckbox" onclick="showPassword()" class="form-check-input" style="color: #002b6c;" />
+                        <label for="showPasswordCheckbox" class="form-check-label" style="color: #002b6c;">Show password</label>
+                    </div>
 
                     <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
                 </form> 
             </div>
-            
         </div>
     </div>
 </div>
@@ -64,3 +67,17 @@
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 }
+
+<script>
+    function showPassword() {
+        var password = document.getElementById("password");
+        var confirmpassword = document.getElementById("confirmpassword");
+        if (password.type === "password" && confirmpassword.type === "password") {
+            password.type = "text";
+            confirmpassword.type = "text";
+        } else {
+            password.type = "password";
+            confirmpassword.type = "password";
+        }
+    }
+</script>
