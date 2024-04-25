@@ -34,15 +34,15 @@
                         <input class="form-check-input" asp-for="Input.RememberMe" style="color: #002b6c;"/>
                         <label class="form-check-label" asp-for="Input.RememberMe" style="color: #002b6c;">Remember me</label>
                     </div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="color: #002b6c;">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword" style="color: #002b6c;">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" style="color: #002b6c;">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" style="color: #002b6c;">Resend email confirmation</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
                 </form>
             </div>
