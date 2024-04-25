@@ -5,9 +5,7 @@
     ViewData["Title"] = "Log in";
     Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 }
-
 <img src="https://www.otas.at/jart/prj3/otas_website_2016/resources/images/otas-logo.png" alt="OTAS Logo" style="position: absolute; top: 10px; right: 10px; width: 100px; height: auto;" />
-
 
 <div class="container">
     <div class="row justify-content-center">
@@ -15,25 +13,25 @@
             <div class="card-body">
                 <form id="account" method="post">
                     <h2>Log in</h2>
-                    <hr />
+                    <hr/>
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="mb-3">
                         <label asp-for="Input.Email" class="form-label">Email</label>
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="Input.Password" class="form-label">Password</label>
-                        <input asp-for="Input.Password" id="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                        <input asp-for="Input.Password" id="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password"/>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" id="showPasswordCheckbox" onclick="showPassword()" class="form-check-input" />
+                        <input type="checkbox" id="showPasswordCheckbox" onclick="showPassword()" class="form-check-input"/>
                         <label for="showPasswordCheckbox" class="form-check-label">Show password</label>
                     </div>
 
                     <div class="mb-3 form-check">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        <input class="form-check-input" asp-for="Input.RememberMe"/>
                         <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
                     </div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
