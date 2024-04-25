@@ -1,14 +1,16 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
-    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+ViewData["Title"] = "Register";
+Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 }
+
+<img src="https://www.otas.at/jart/prj3/otas_website_2016/resources/images/otas-logo.png" alt="OTAS Logo" style="position: absolute; top: 10px; right: 10px; width: 100px; height: auto;" />
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
+
             <!-- Keine Card in dem Fall da das Formular dann auf der Homepage selbst in einer Card angezeigt wird -->
             <div class="card-body">
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -53,7 +55,7 @@
                     <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>
