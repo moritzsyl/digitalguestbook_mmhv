@@ -14,21 +14,29 @@ Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
                     <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     <div class="mb-3">
-                        <label for="firstName" class="form-label" style="color: #002b6c;">First Name *</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Max" aria-required="true" style="color: #002b6c;" />
+                        <label asp-for="Input.FirstName" class="form-label">Vorname *</label>
+                        <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="Max" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="lastName" class="form-label" style="color: #002b6c;">Last Name *</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Mustermann" aria-required="true" style="color: #002b6c;" />
+                        <label asp-for="Input.LastName" class="form-label">Nachname *</label>
+                        <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Mustermann" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Input.Email" class="form-label" style="color: #002b6c;">Email *</label>
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" style="color: #002b6c;" />
-                        <span asp-validation-for="Input.Email" class="text-danger" style="color: #002b6c;"></span>
+                        <label asp-for="Input.Email" class="form-label">Email *</label>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="name@example.com" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label for="phoneNumber" class="form-label" style="color: #002b6c;">Phone Number *</label>
-                        <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="+43 888 05 05" aria-required="true" style="color: #002b6c;" />
+                        <label asp-for="Input.PhoneNumber" class="form-label">Telefonnummer *</label>
+                        <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="tel" aria-required="true" placeholder="+43 123 1234" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Input.CompanyName" class="form-label">Firmenname</label>
+                        <input asp-for="Input.CompanyName" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Example GmbH" />
+                        <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="Input.Password" class="form-label" style="color: #002b6c;">Password *</label>
@@ -47,7 +55,7 @@ Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
                     </div>
 
                     <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-                </form>
+                </form> 
             </div>
         </div>
     </div>
