@@ -13,12 +13,15 @@ public class digitalguestbookUser : IdentityUser
 {
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
-    public string FirstName { get; set; }
+    public string? FirstName { get; set; }
+    
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
-    public string LastName { get; set; }
+    public string? LastName { get; set; }
+    
     [PersonalData]
     [Column(TypeName = "nvarchar(255)")]
-    public string CompanyName { get; set; }
+    public string? CompanyName { get; set; }
 }
+
 

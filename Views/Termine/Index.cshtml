@@ -1,0 +1,40 @@
+@model List<Termine>
+@{
+}
+
+<h2 class="text-center mb-5">Terminliste</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Termin" asp-action="Create">Neuer Termin</a>
+    </div>
+    <div class="col">
+        
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>E-Mail</th>
+        <th>Company</th>
+        <th>Date</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var termin in Model)
+        {
+            <tr>
+                <td>@termin.Email</td>
+                <td>@termin.Company</td>
+                <td>@termin.Date</td>
+                <td>@termin.Description</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-danger btn-sm" asp-controller="Termin" asp-action="Edit" asp-route="@termin.Id">Absagen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

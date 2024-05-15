@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using digitalguestbook.Data;
 using digitalguestbook.Areas.Identity.Data;
+using digitalguestbook.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("digitalguestbookDBContextConnection") ?? throw new InvalidOperationException("Connection string 'digitalguestbookDBContextConnection' not found.");
 
@@ -10,9 +12,15 @@ builder.Services.AddDbContext<digitalguestbookDBContext>(options => options.UseS
 builder.Services.AddDefaultIdentity<digitalguestbookUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<digitalguestbookDBContext>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(); // Unterstützung von MVC hinzufügen
+builder.Services.AddControllersWithViews(); // Unterstï¿½tzung von MVC hinzufï¿½gen
 
-builder.Services.AddRazorPages(); // Unterstützung von Razor Pages hinzufügen
+builder.Services.AddRazorPages(); // Unterstï¿½tzung von Razor Pages hinzufï¿½gen
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("");
+    options.UseSqlServer(connectionString);
+});
 
 var app = builder.Build();
 
@@ -35,6 +43,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages(); // Routen für Razor Pages hinzufügen
+app.MapRazorPages(); // Routen fï¿½r Razor Pages hinzufï¿½gen
 
 app.Run();
