@@ -20,7 +20,7 @@ namespace DigitalGuestbook
                 options.UseSqlServer(builder.Configuration.GetConnectionString("guestbookAppointmentDBConnection")));
 
             builder.Services
-                .AddDefaultIdentity<digitalguestbookUser>(options => options.SignIn.RequireConfirmedAccount = false) //
+                .AddDefaultIdentity<digitalguestbookUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<digitalguestbookDBContext>();
 
@@ -51,6 +51,8 @@ namespace DigitalGuestbook
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapRazorPages(); // Routen f�r Razor Pages hinzuf�gen
+            
+            /*
 
             using (var scope = app.Services.CreateScope())
             {
@@ -84,6 +86,7 @@ namespace DigitalGuestbook
                     await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
+            */
 
             app.Run();
         }
