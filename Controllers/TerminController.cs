@@ -13,7 +13,13 @@ public class TerminController : Controller
     }
     public IActionResult Index()
     {
-        var termine = context.Termine.ToList();
+        var termine = context.Termine.OrderByDescending(t=>t.Id).ToList();
         return View(termine);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
 }

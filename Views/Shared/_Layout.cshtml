@@ -6,37 +6,46 @@
     <title>@ViewData["Title"] - digitalguestbook</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            margin-bottom: 60px; /* Höhe des Footers */
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* Höhe des Footers */
+            background-color: rgb(227, 227, 227);
+            color: black;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="col-auto">
-            <a href="https://www.otas.at/" target="_blank">
-                <img src="https://www.otas.at/jart/prj3/otas_website_2016/resources/images/otas-logo.png" alt="OTAS Logo" style="width: 40%; margin-top: 5px; margin-left: 25px; height: auto;"/>
-            </a>
-        </div>
-        <div class="container-fluid" style="margin-left: 73%; position: absolute">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="container-fluid text-end">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">digitalguestbook</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">digitalguestbook</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Termin" asp-action="Index">Termine</a>
+                        <a class="nav-link" asp-area="" asp-controller="Termin" asp-action="Index">Termine</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </li>
                 </ul>
             </div>
@@ -44,22 +53,24 @@
     </nav>
 </header>
 
-
 <div class="container">
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
 
-<br>
-<footer style="background-color: rgb(227, 227, 227); color: black; text-align: center;">
-    <p><a href="https://www.otas.at/?gclid=CjwKCAiA_tuuBhAUEiwAvxkgTrSjbVs67wBgvBD0xsgOcYHwypl8FPrOdIS9dSsKE-e0VSFVBTvUqRoCsNoQAvD_BwE" target="_blank">OTAS Computer Software GmbH</a><br>
-        <a href="https://maps.app.goo.gl/4qq3tCyyNKX7AoXK6" target="_blank">Alfred Feierfeil Straße 3, 2380 Perchtoldsdorf, Österreich</a>
-        <a href="mailto:office@otas.at "><br>
-            office@otas.at</a><br>
-        +43 (1) 888 05 05</p>
-    <!-- <br> <a href="tel:++43 (1) 888 05 05">++43 (1) 888 05 05</a> Würde die Telefonapp öffnen (nicht unbedingt notwendig)-->
+
+<!--
+<footer>
+    <p>
+        <a href="https://www.otas.at/?gclid=CjwKCAiA_tuuBhAUEiwAvxkgTrSjbVs67wBgvBD0xsgOcYHwypl8FPrOdIS9dSsKE-e0VSFVBTvUqRoCsNoQAvD_BwE" target="_blank">OTAS Computer Software GmbH</a><br />
+        <a href="https://maps.app.goo.gl/4qq3tCyyNKX7AoXK6" target="_blank">Alfred Feierfeil Straße 3, 2380 Perchtoldsdorf, Österreich</a><br />
+        <a href="mailto:office@otas.at">office@otas.at</a><br />
+        +43 (1) 888 05 05
+    </p>
 </footer>
+-->
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
