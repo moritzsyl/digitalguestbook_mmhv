@@ -18,7 +18,7 @@ builder.Services.AddRazorPages(); // Unterst�tzung von Razor Pages hinzuf�ge
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("");
+    var connectionString = builder.Configuration.GetConnectionString("guestbookAppointmentDBConnection");
     options.UseSqlServer(connectionString);
 });
 
