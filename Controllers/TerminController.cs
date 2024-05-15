@@ -48,4 +48,17 @@ public class TerminController : Controller
         
         return RedirectToAction("Index", "Termin");
     }
+
+    public IActionResult Delete(int id)
+    {
+        var termin = context.Termine.Find(id);
+        if (termin == null)
+        {
+            return RedirectToAction("Index", "Termin");
+        }
+
+        context.Termine.Remove(termin);
+        context.SaveChanges(true);
+        return RedirectToAction("Index", "Termin");
+    }
 }
