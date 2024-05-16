@@ -1,17 +1,19 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
-
-
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using digitalguestbook.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using digitalguestbook.Areas.Identity.Data;
+using Microsoft.Extensions.Logging;
 
 namespace digitalguestbook.Areas.Identity.Pages.Account
 {
@@ -37,86 +39,54 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
+            _emailSender = emailSender;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string ReturnUrl { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
             [Required]
-            [Display(Name = "Vorname")]
+            [Display(Name = "First Name")]
             [DataType(DataType.Text)]
-
             public string FirstName { get; set; }
 
             [Required]
-            [Display(Name = "Nachname")]
+            [Display(Name = "Last Name")]
             [DataType(DataType.Text)]
-
             public string LastName { get; set; }
 
-            [Display(Name = "Firmenname")]
+            [Display(Name = "Company Name")]
             [DataType(DataType.Text)]
             public string CompanyName { get; set; }
 
             [Required]
-            [Display(Name = "Telefonnummer")]
+            [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
             public string PhoneNumber { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
-                MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            /// 
             [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
-
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -126,13 +96,15 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                user.EmailConfirmed = false;
+                user.UserName = Input.Email;
+
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -149,20 +121,11 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    /*
-                    await _sendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                    */
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation",
-                            new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+
+                    return RedirectToPage("RegisterConfirmation",
+                        new { email = Input.Email, returnUrl = returnUrl });
                 }
 
                 foreach (var error in result.Errors)
@@ -171,36 +134,8 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
-
-        /*
-
-        [ApiController]
-        [Route("[controller]")]
-        public class MailController : ControllerBase
-        {
-            private readonly Func<string, string, string, Task> _sendEmailAsync;
-
-            public MailController(Func<string, string, string, Task> sendEmailAsync)
-            {
-                _sendEmailAsync = sendEmailAsync;
-            }
-
-            [HttpPost]
-            public async Task<IActionResult> Send()
-            {
-                string email = "vbaudisch@student.tgm.ac.at";
-                string subject = "TestSubject";
-                string messageBody = "TestBody";
-
-                await _sendEmailAsync(email, subject, messageBody);
-
-                return Ok("Success");
-            }
-        }
-        */
 
         private digitalguestbookUser CreateUser()
         {
@@ -225,26 +160,5 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
 
             return (IUserEmailStore<digitalguestbookUser>)_userStore;
         }
-
-        /*
-        private async Task SendEmailAsync(string email, string subject, string messageBody)
-        {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Vincent", "vbaudisch2005@gmail.com"));
-            message.To.Add(new MailboxAddress("", email));
-            message.Subject = subject;
-            message.Body = new TextPart("plain") { Text = messageBody };
-
-            using (var client = new MailKit.Net.Smtp.SmtpClient())
-            {
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true; // This line is to bypass SSL certificate validation, modify as needed
-                await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                await client.AuthenticateAsync("vbaudisch2005@gmail.com", "xrww gjrx uldh wzmgd");
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
-            }
-        }
-        */
-        
     }
 }
