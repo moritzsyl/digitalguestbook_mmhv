@@ -40,4 +40,8 @@
     <Content Remove="css\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

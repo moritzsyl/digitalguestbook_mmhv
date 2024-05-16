@@ -15,11 +15,11 @@ namespace DigitalGuestbook
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("digitalguestbookDBContextConnection") ??
-                                   throw new InvalidOperationException(
-                                       "Connection string 'digitalguestbookDBContextConnection' not found.");
+         
 
-            builder.Services.AddDbContext<digitalguestbookDBContext>(options => options.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<digitalguestbookDBContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("digitalguestbookDBContextConnection")));
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("guestbookAppointmentDBConnection")));
 

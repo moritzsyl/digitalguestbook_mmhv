@@ -3,21 +3,24 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using digitalguestbook.Data;
 
 #nullable disable
 
-namespace digitalguestbook.Migrations
+namespace digitalguestbook.Migrations.digitalguestbookDB
 {
     [DbContext(typeof(digitalguestbookDBContext))]
-    partial class digitalguestbookDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240515165731_Auth init")]
+    partial class Authinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -168,7 +171,6 @@ namespace digitalguestbook.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -183,11 +185,9 @@ namespace digitalguestbook.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("LockoutEnabled")

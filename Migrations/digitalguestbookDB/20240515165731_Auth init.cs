@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace digitalguestbook.Migrations
+namespace digitalguestbook.Migrations.digitalguestbookDB
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Authinit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,9 +30,9 @@ namespace digitalguestbook.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(255)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    CompanyName = table.Column<string>(type: "nvarchar(255)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

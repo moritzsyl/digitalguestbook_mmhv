@@ -1,13 +1,14 @@
 using digitalguestbook.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace digitalguestbook.Services;
-
-public class ApplicationDbContext : DbContext
+namespace digitalguestbook.Services
 {
-    public ApplicationDbContext(DbContextOptions options) : base(options)
+    public class ApplicationDbContext : DbContext
     {
-        
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
+        public DbSet<Appointment> Appointments { get; set; }
     }
-    public DbSet<Termine> Termine { get; set; }
 }
