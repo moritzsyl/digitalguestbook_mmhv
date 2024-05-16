@@ -37,7 +37,9 @@ public class AppointmentController : Controller
             Email = appointmentCreate.Email,
             Company = appointmentCreate.Company,
             Description = appointmentCreate.Description,
-            Date = appointmentCreate.Date
+            Date = appointmentCreate.Date,
+            Time = appointmentCreate.Time
+            
         };
 
         context.Appointments.Add(appointment);
