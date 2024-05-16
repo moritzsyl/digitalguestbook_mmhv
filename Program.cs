@@ -39,8 +39,6 @@ namespace DigitalGuestbook
             {
                 options.ApiKey = builder.Configuration.GetSection("SendGridSettings").GetValue<string>("ApiKey");
             });
-
-            builder.Services.AddScoped<IEmailSender, EmailSenderService>();
             
             var app = builder.Build();
 

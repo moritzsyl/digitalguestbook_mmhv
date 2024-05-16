@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using digitalguestbook.Areas.Identity.Data;
+using digitalguestbook.Services;
 using Microsoft.Extensions.Logging;
 
 namespace digitalguestbook.Areas.Identity.Pages.Account
@@ -121,8 +122,12 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    string emailsubject = "Test";
+                    string username = "Vincent";
+                    string emailmessage = "It works!";
+
+                    EmailSender emailSender = new EmailSender();
+                    emailSender.SendEmail(emailsubject,"vincent.baudisch@gmail.com", username, emailmessage);
 
                     return RedirectToPage("RegisterConfirmation",
                         new { email = Input.Email, returnUrl = returnUrl });
