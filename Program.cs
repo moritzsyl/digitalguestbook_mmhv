@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using digitalguestbook.Data;
 using digitalguestbook.Areas.Identity.Data;
 using digitalguestbook.Services;
+using DigitalGuestbook.Settings;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SendGrid.Extensions.DependencyInjection;
+
 
 namespace DigitalGuestbook
 {
@@ -29,6 +33,15 @@ namespace DigitalGuestbook
 
             builder.Services.AddRazorPages(); // Unterst�tzung von Razor Pages hinzuf�gen
 
+            builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGridSettings"));
+
+            builder.Services.AddSendGrid(options =>
+            {
+                options.ApiKey = builder.Configuration.GetSection("SendGridSettings").GetValue<string>("ApiKey");
+            });
+
+            builder.Services.AddScoped<IEmailSender, EmailSenderService>();
+            
             var app = builder.Build();
 
 // Configure the HTTP request pipeline.
