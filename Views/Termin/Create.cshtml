@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-8 mx-auto rounded border p-3">
         <h2 class="text-center mb-5">New Appointment</h2>
-        
+
         <form method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Name</label>
@@ -31,6 +31,22 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Time</label>
+                <div class="col-sm-8">
+                    <select class="form-control" asp-for="Time">
+                        <option value="" disabled selected>Select a time</option>
+                        @for (int hour = 9; hour < 17; hour++)
+                        {
+                        <option value="@TimeSpan.FromHours(hour).ToString()">@($"{hour:00}:00")</option>
+                        <option value="@TimeSpan.FromHours(hour + 0.5).ToString()">@($"{hour:00}:30")</option>
+                        }
+                        <option value="@TimeSpan.FromHours(17).ToString()">17:00</option>
+                    </select>
+                    <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+            </div>
+
 
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Description</label>
@@ -39,7 +55,7 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="offset-sm-4 col-sm-4 d-grid">
                     <button type="submit" class="btn btn-primary">Book Appointment</button>

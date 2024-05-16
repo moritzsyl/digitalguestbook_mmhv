@@ -1,4 +1,4 @@
-@model List<Termine>
+@model List<digitalguestbook.Models.Termine>
 @{
 }
 
@@ -9,7 +9,7 @@
         <a class="btn btn-primary" asp-controller="Termin" asp-action="Create">New Appointment</a>
     </div>
     <div class="col">
-        
+
     </div>
 </div>
 
@@ -19,22 +19,25 @@
         <th>E-Mail</th>
         <th>Company</th>
         <th>Date</th>
+        <th>Time</th>
         <th>Description</th>
+        <th>Actions</th>
     </tr>
     </thead>
-    
+
     <tbody>
-        @foreach (var termin in Model)
-        {
-            <tr>
-                <td>@termin.Email</td>
-                <td>@termin.Company</td>
-                <td>@termin.Date</td>
-                <td>@termin.Description</td>
-                <td style="white-space:nowrap">
-                    <a class="btn btn-danger btn-sm" asp-controller="Termin" asp-action="Delete" asp-route="@termin.Id">Absagen</a>
-                </td>
-            </tr>
-        }
+    @foreach (var termin in Model)
+    {
+    <tr>
+        <td>@termin.Email</td>
+        <td>@termin.Company</td>
+        <td>@termin.Date.ToString("yyyy-MM-dd")</td>
+        <td>@termin.Time.ToString(@"hh\:mm")</td>
+        <td>@termin.Description</td>
+        <td style="white-space:nowrap">
+            <a class="btn btn-danger btn-sm" asp-controller="Termin" asp-action="Delete" asp-route-id="@termin.Id">Absagen</a>
+        </td>
+    </tr>
+    }
     </tbody>
 </table>
