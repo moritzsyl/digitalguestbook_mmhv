@@ -127,7 +127,7 @@ namespace digitalguestbook.Areas.Identity.Pages.Account
                     string emailmessage = "It works!";
 
                     EmailSender emailSender = new EmailSender();
-                    emailSender.SendEmail(emailsubject,"vincent.baudisch@gmail.com", username, emailmessage);
+                    emailSender.SendEmail(emailsubject,Input.Email, username, emailmessage);
 
                     return RedirectToPage("RegisterConfirmation",
                         new { email = Input.Email, returnUrl = returnUrl });
